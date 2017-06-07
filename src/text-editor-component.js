@@ -332,7 +332,8 @@ class TextEditorComponent {
     this.derivedDimensionsCache = {}
     this.updateModelSoftWrapColumn()
     if (this.pendingAutoscroll) {
-      const {screenRange, options} = this.pendingAutoscroll
+      let {screenRange, options} = this.pendingAutoscroll
+      screenRange = this.props.model.clipScreenRange(screenRange)
       this.autoscrollVertically(screenRange, options)
       this.requestHorizontalMeasurement(screenRange.start.row, screenRange.start.column)
       this.requestHorizontalMeasurement(screenRange.end.row, screenRange.end.column)
